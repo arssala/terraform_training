@@ -1,19 +1,16 @@
-# Lab 10: Destroy
+# Lab 10: Détruire
 
-Duration: 5 minutes
+Durée: 5 minutes
 
-You've now learned about all of the key features of Terraform, and how to use it
-to manage your infrastructure. The last command we'll use is `terraform
-destroy`. As you might guess from the name, this will destroy all of the
-infrastructure managed by this configuration.
+Vous avez maintenant découvert toutes les fonctionnalités clés de Terraform et comment l'utiliser pour gérer votre infrastructure. La dernière commande que nous utiliserons est «terraform destroy». Comme vous pouvez le deviner d'après le nom, cela détruira toute l'infrastructure gérée par cette configuration.
 
-- Task 1: Destroy your infrastructure
+- Tâche 1: Détruisez votre infrastructure
 
-## Task 1: Destroy your infrastructure
+## Tâche 1: Détruisez votre infrastructure
 
-### Step 10.1.1
+### Étape 10.1.1
 
-Run the command `terraform destroy`:
+Exécutez la commande `terraform destroy`:
 
 ```shell
 terraform destroy
@@ -58,7 +55,4 @@ module.keypair.tls_private_key.generated: Destruction complete after 0s
 Destroy complete! Resources: 7 destroyed.
 ```
 
-You'll need to confirm the action by responding with `yes`. You could achieve
-the same effect by removing all of your configuration and running `terraform
-apply`, but you often will want to keep the configuration, but not the
-infrastructure created by the configuration.
+Vous devrez confirmer l'action en répondant par `yes`. Vous pourriez réaliser le même effet en supprimant toute votre configuration et en exécutant `terraform apply`, mais vous voudrez souvent conserver la configuration, mais pas l'infrastructure créée par la configuration.

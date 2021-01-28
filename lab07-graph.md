@@ -1,18 +1,16 @@
 # Lab 7: Terraform Graph
 
-Duration: 5 minutes
+Durée: 5 minutes
 
-Terraform knows a lot about your configuration. We've already seen how to use
-`terraform show` to output information about your resources. Terraform can also
-present this data in DOT format, which is used by GraphVis and similar programs to generate graphs.
+Terraform sait beaucoup sur votre configuration. Nous avons déjà vu comment utiliser `terraform show` pour afficher des informations sur vos ressources. Terraform peut également présenter ces données au format DOT, qui est utilisé par GraphVis et des programmes similaires pour générer des graphiques.
 
-- Task 1: Generate a graph against your current Terraform configuration
+- Tâche 1: générer un graphique par rapport à votre configuration Terraform actuelle
 
-## Task 1
+## Tache 1
 
-### Step 7.1.1
+### Étape 7.1.1
 
-Run `terraform graph` in your terraform directory and note the output.
+Exécutez `terraform graph` dans votre répertoire terraform et notez la sortie.
 
 ```shell
 terraform graph
@@ -28,6 +26,9 @@ digraph {
 }
 ```
 
-### Step 7.1.2
+### Étape 7.1.2
 
-Paste that output into [webgraphviz](http://www.webgraphviz.com) to get a visual representation of dependencies that Terraform creates for your configuration.
+Collez cette sortie dans [webgraphviz](http://www.webgraphviz.com) pour obtenir une représentation visuelle des dépendances que Terraform crée pour votre configuration.
+
+---
+[Lab suivant ->](lab08-meta-arguments.md)

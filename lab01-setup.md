@@ -1,47 +1,44 @@
-# Lab 1: Lab Setup
+# Lab 1: Configuration du lab
 
-Duration: 20 minutes
+Durée: 20 minutes
 
-- Task 1: Connect to the Student Workstation
-- Task 2: Verify Terraform installation
-- Task 3: Generate your first Terraform Configuration
-- Task 4: Use the Terraform CLI to Get Help
-- Task 5: Apply and Update your Configuration
+- Tâche 1: se connecter au poste de travail étudiant
+- Tâche 2: vérifier l'installation de Terraform
+- Tâche 3: Générez votre première configuration Terraform
+- Tâche 4: utiliser la CLI Terraform pour obtenir de l'aide
+- Tâche 5: Appliquer et mettre à jour votre configuration
 
-## Task 1: Connect to the Student Workstation
+## Tâche 1: connexion au poste de travail étudiant
 
-In the previous lab, you learned how to connect to your workstation with either VSCode, SSH, or the web-based client.
 
-One you've connected, make sure you've navigated to the `/workstation/terraform` directory. This is where we'll do all of our work for this training.
+## Tâche 2: vérifier l'installation de Terraform
 
-## Task 2: Verify Terraform installation
+### Étape 1.2.1
 
-### Step 1.2.1
-
-Run the following command to check the Terraform version:
+Exécutez la commande suivante pour vérifier la version de Terraform:
 
 ```shell
 terraform -version
 ```
 
-You should see:
+Tu devrais voir:
 
 ```text
 Terraform v0.12.6
 ```
 
-## Task 3: Generate your first Terraform Configuration
+## Tâche 3: Générez votre première configuration Terraform
 
-### Step 1.3.1
+### Étape 1.3.1
 
-In the /workstation/terraform directory, edit the file titled `main.tf` to create an AWS instance with the following properties available in the comments at the top of the file:
+Dans le répertoire terraform, créez le fichier intitulé `main.tf` pour créer une instance AWS avec les propriétés suivantes:
 
 - ami
 - subnet_id
 - vpc_security_group_ids
 - tags.Identity
 
-Your final `main.tf` file should look similar to this with different values:
+Votre fichier final `main.tf` devrait ressembler à ceci avec des valeurs différentes:
 
 ```hcl
 provider "aws" {
@@ -63,13 +60,13 @@ resource "aws_instance" "web" {
 }
 ```
 
-Don't forget to save the file before moving on!
+N'oubliez pas de sauvegarder le fichier avant de continuer!
 
-## Task 4: Use the Terraform CLI to Get Help
+## Tâche 4: utiliser la CLI Terraform pour obtenir de l'aide
 
-### Step 1.4.1
+### Étape 1.4.1
 
-Execute the following command to display available commands:
+Exécutez la commande suivante pour afficher les commandes disponibles:
 
 ```shell
 terraform -help
@@ -99,20 +96,20 @@ Common commands:
 
     ...
 ```
-* (full output truncated for sake of brevity in this guide)
+* (sortie complète tronquée par souci de brièveté dans ce guide)
 
 
-Or, you can use short-hand:
+Ou, vous pouvez utiliser le raccourci:
 
 ```shell
 terraform -h
 ```
 
-### Step 1.4.2
+### Étape 1.4.2
 
-Navigate to the Terraform directory and initialize Terraform
+Accédez au répertoire Terraform et initialisez Terraform
 ```shell
-cd /workstation/terraform
+cd terraform
 ```
 
 ```shell
@@ -126,9 +123,10 @@ Initializing provider plugins...
 Terraform has been successfully initialized!
 ```
 
-### Step 1.4.3
 
-Get help on the `plan` command and then run it:
+### Étape 1.4.3
+
+Obtenez de l'aide sur la commande `plan`, puis exécutez-la:
 
 ```shell
 terraform -h plan
@@ -138,30 +136,30 @@ terraform -h plan
 terraform plan
 ```
 
-## Task 5: Apply and Update your Configuration
+## Tâche 5: Appliquer et mettre à jour votre configuration
 
-### Step 1.5.1
+### Étape 1.5.1
 
-Run the `terraform apply` command to generate real resources in AWS
+Exécutez la commande `terraform apply` pour générer des ressources réelles dans AWS
 
 ```shell
 terraform apply
 ```
 
-You will be prompted to confirm the changes before they're applied. Respond with
+Vous serez invité à confirmer les modifications avant leur application. Répondre avec
 `yes`.
 
-### Step 1.5.2
+### Étape 1.5.2
 
-Use the `terraform show` command to view the resources created and find the IP address for your instance.
+Utilisez la commande `terraform show` pour afficher les ressources créées et trouver l'adresse IP de votre instance.
 
-Ping that address to ensure the instance is running.
+Envoyez un ping à cette adresse pour vous assurer que l'instance est en cours d'exécution.
 
-### Step 1.5.3
+### Étape 1.5.3
 
-Terraform can perform in-place updates on your instances after changes are made to the `main.tf` configuration file.
+Terraform peut effectuer des mises à jour sur place sur vos instances une fois que des modifications sont apportées au fichier de configuration `main.tf`.
 
-Add two tags to the AWS instance:
+Ajoutez deux balises à l'instance AWS:
 
 - Name
 - Environment
@@ -174,15 +172,15 @@ Add two tags to the AWS instance:
   }
 ```
 
-### Step 1.5.4
+### Étape 1.5.4
 
-Plan and apply the changes you just made and note the output differences for additions, deletions, and in-place changes.
+Planifiez et appliquez les modifications que vous venez d'effectuer et notez les différences de sortie pour les ajouts, les suppressions et les modifications.
 
 ```shell
 terraform apply
 ```
 
-You should see output indicating that _aws_instance.web_ will be modified:
+Vous devriez voir une sortie indiquant que _aws_instance.web_ sera modifié:
 
 ```text
 ...
@@ -193,7 +191,7 @@ You should see output indicating that _aws_instance.web_ will be modified:
 ...
 ```
 
-When prompted to apply the changes, respond with `yes`.
+Lorsque vous êtes invité à appliquer les modifications, répondez par `yes`.
 
 ---
-[Next lab -->](lab02-outputs.md)
+[Lab suivant (Les outputs) ->](lab02-outputs.md)

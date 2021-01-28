@@ -1,26 +1,26 @@
-# Lab 5: Modules
+# Lab 5: Les Modules
 
-Duration: 20 minutes
+Durée: 20 minutes
 
-Configuration files can be separated out into modules to better organize your configuration. This makes your code easier to read and reusable across your organization. You can also use the Public Module Registry to find pre-configured modules.
+Les fichiers de configuration peuvent être séparés en modules pour mieux organiser votre configuration. Cela rend votre code plus facile à lire et réutilisable dans toute votre organisation. Vous pouvez également utiliser le registre public de modules pour rechercher des modules préconfigurés.
 
-- Task 1: Refactor your existing code into a local module
-- Task 2: Explore the Pubic Module Registry and install a module
-- Task 3: Refresh and rerun your Terraform configuration
+- Tâche 1: Refactoriser votre code existant dans un module local
+- Tâche 2: Explorez le registre Pubic des modules et installez un module
+- Tâche 3: Actualisez et réexécutez votre configuration Terraform
 
-## Task 1: Refactor your existing code into a local module
+## Tâche 1: Refactoriser votre code existant dans un module local
 
-A Terraform module is just a set of configuration. For this lab, we'll refactor
-your existing configuration so that the webserver configuration is inside a
+Un module Terraform n'est qu'un ensemble de configuration. Pour ce lab, nous allons refactoriser
+votre configuration existante afin que la configuration du serveur Web soit à l'intérieur d'un
 module.
 
-### Step 5.1.1
+### Étape 5.1.1
 
-Create a new directory called `server` in your `/workspace/terraform` directory and create a new file inside of it called `server.tf`.
+Créez un nouveau répertoire appelé `server` dans votre répertoire `terraform` et créez un nouveau fichier à l'intérieur appelé `server.tf`.
 
-### Step 5.1.2
+### Étape 5.1.2
 
-Edit the file `server/server.tf`, with the following contents:
+Editez le fichier `server/server.tf`, avec le contenu suivant:
 
 ```hcl
 variable ami {}
@@ -52,9 +52,9 @@ output "public_dns" {
 }
 ```
 
-### Step 5.1.3
+### Étape 5.1.3
 
-In your root configuration (also called your root module) `/workspace/terraform/main.tf`, we can remove the previous references to your configuration and refactor them as a module.
+Dans votre configuration racine (également appelée le module racine) `terraform/main.tf`, nous pouvons supprimer les références précédentes à votre configuration et les refactoriser en tant que module.
 
 ```hcl
 # Remove the entire block:
@@ -73,10 +73,7 @@ module "server" {
 }
 ```
 
-Our outputs should be defined in the root module as well. At the bottom of your
-`main.tf` configuration, modify the public IP and public DNS outputs to match
-the following. Notice the difference in interpolation now that the information
-is being delivered by a module.
+Nos 'outputs' doivent également être définies dans le module racine. Au bas de votre configuration `main.tf`, modifiez les outputs public IP et public DNS pour correspondre au code suivant. Notez la différence d'interpolation maintenant que les informations sont fournies par un module.
 
 ```hcl
 output "public_ip" {
@@ -88,15 +85,11 @@ output "public_dns" {
 }
 ```
 
-### Step 5.1.4
+### Étape 5.1.4
 
-Now run `terraform get` or `terraform init` to install the module. Since we're
-just adding a module and no providers, `get` is sufficient, but `init` is safe
-to use too. Even local modules need to be installed before they can be used.
+Maintenant, lancez `terraform get` ou` terraform init` pour installer le module. Puisque nous ajoutons simplement un module et aucun fournisseur, `get` est suffisante, mais` init` est également 'safe' à utiliser. Même les modules locaux doivent être installés avant de pouvoir être utilisés.
 
-Once you've done that, you can run `terraform apply` again. Notice that the the
-instance will be recreated, and its id changed, but everything else should
-remain the same.
+Une fois que vous avez fait cela, vous pouvez exécuter à nouveau `terraform apply`. Notez que l'instance sera recréée et son identifiant modifié, mais tout le reste doit rester le même.
 
 ```shell
 terraform apply
@@ -115,26 +108,23 @@ terraform apply
 ...
 ```
 
-## Task 2: Explore the Public Module Registry
+## Tâche 2: Explorer le registre public des modules
 
-### Step 5.2.1
+### Étape 5.2.1
 
-HashiCorp hosts a public module registry at: https://registry.terraform.io/
+HashiCorp héberge un registre de modules à l'adresse: https://registry.terraform.io/
 
-The registry contains a large set of community-contributed modules that you can
-use in your own configurations. Explore the registry to see what is available to
-you.
+Le registre contient un grand ensemble de modules fournis par la communauté que vous pouvez utiliser dans vos propres configurations. Explorez le registre pour voir ce qui est disponible.
 
-### Step 5.2.2
+### Étape 5.2.2
 
-Search for "dynamic-keys" in the public registry and uncheck the "Verified" checkbox. You should then see a module called "dynamic-keys" created by one of HashiCorp's founders, Mitchell Hashimoto. Alternatively, you can navigate directly to https://registry.terraform.io/modules/mitchellh/dynamic-keys/aws/2.0.0.
+Recherchez "dynamic-keys" dans le registre public et décochez la case "Verified". Vous devriez alors voir un module appelé "dynamic-keys" créé par l'un des fondateurs de HashiCorp, Mitchell Hashimoto. Vous pouvez également accéder directement à https://registry.terraform.io/modules/mitchellh/dynamic-keys/aws/2.0.0.
 
-Select this module and read the content on the Readme, Inputs, Outputs, and Resources tabs. This module will generate a public and private key pair so you can SSH into your instance.
+Sélectionnez ce module et lisez le contenu des onglets `Readme`, `Inputs`, `Outputs`, et `Resources`. Ce module générera une paire de clés publique et privée afin que vous puissiez SSH dans votre instance.
 
-### Step 5.2.3
+### Étape 5.2.3
 
-To integrate this module into your configuration, add this after your provider
-block in `main.tf`:
+Pour intégrer ce module dans votre configuration, ajoutez-le après votre `provider block` dans `main.tf`:
 
 ```hcl
 module "keypair" {
@@ -145,18 +135,16 @@ module "keypair" {
 }
 ```
 
-**__This module exposes the private key information in the Terraform state and should not be used in production!__**
+**__ Ce module expose les informations de clé privée dans Terraform state et ne doit pas être utilisé en production! __**
 
-Now you're referring to the module, but Terraform will need to download the
-module source before using it. Run the command `terraform init` to download it.
+Vous faites maintenant référence au module, mais Terraform devra télécharger la source du module avant de l'utiliser. Exécutez la commande `terraform init` pour le télécharger.
 
-To provision the resources defined by the module, run `terraform apply`, and
-answer `yes` to the confirmation prompt.
+Pour provisionner les ressources définies par le module, exécutez `terraform apply`, et répondez `yes` à l'invite de confirmation.
 
 
-### Step 5.2.4
+### Étape 5.2.4
 
-Now we'll use the _keypair_ module to install a public key on our server. In `main.tf`, add the necessary output from our key module to our server module:
+Nous allons maintenant utiliser le module _keypair_ pour installer une clé publique sur notre serveur. Dans `main.tf`, ajoutez les outputs nécessaires de notre module _keypair_ à notre module _server_:
 
 ```hcl
 module "server" {
@@ -171,17 +159,16 @@ module "server" {
 }
 ```
 
-### Step 5.2.5
+### Étape 5.2.5
 
-In your `server/server.tf` file, add two new variables to the rest of the variables at the top of the file:
+Dans votre fichier `server/server.tf`, ajoutez deux nouvelles variables au reste des variables en haut du fichier:
 
 ```hcl
 variable key_name {}
 variable private_key {}
 ```
 
-Add the _key_name_ variable to the _aws_instance_ resource block in
-`server/server.tf`:
+Ajoutez la variable _key_name_ au bloc de ressources _aws_instance_ dans `server/server.tf`:
 
 ```hcl
 resource "aws_instance" "web" {
@@ -195,17 +182,16 @@ resource "aws_instance" "web" {
 }
 ```
 
-We'll use the private_key variable later.
+Nous utiliserons la variable private_key plus tard.
 
 
-## Task 3: Refresh and rerun your Terraform configuration
+## Tâche 3: Actualisez et réexécutez votre configuration Terraform
 
-### Step 5.3.1
+### Étape 5.3.1
 
-Rerun `terraform apply` to delete the original instance and recreate it once
-again. Now the public key will be installed on the new instance.
+Réexécutez `terraform apply` pour supprimer l'instance d'origine et la recréer à nouveau. La clé publique sera maintenant installée sur la nouvelle instance.
 
-It may take a few minutes for the old instance to be destroyed and the new one crated. You might notice that both of these things happen in parallel:
+La destruction de l'ancienne instance et la mise en place de la nouvelle peuvent prendre quelques minutes. Vous remarquerez peut-être que ces deux choses se produisent en parallèle:
 
 ```
 ...
@@ -218,10 +204,9 @@ module.server.aws_instance.web: Still creating... [10s elapsed]
 ...
 ```
 
-Since there are no dependencies between the two, terraform can do both operations at the same time. This does mean that while the apply is still being run, both instances could exist at the same time, or neither might.
+Puisqu'il n'y a aucune dépendance entre les deux, terraform peut effectuer les deux opérations en même temps. Cela signifie que pendant que l'application est toujours en cours d'exécution, les deux instances peuvent exister en même temps.
 
-You'll also see that the outputs now include a list of (for now) one
-_public_dns_ value and one _public_ip_:
+Vous verrez également que les sorties incluent désormais une liste (pour l'instant) des valeurs _public_dns_ et _public_ip_:
 
 ```text
 ...
@@ -234,9 +219,7 @@ public_dns = ec2-54-184-51-90.us-west-2.compute.amazonaws.com
 public_ip = 54.184.51.90
 ```
 
-When we moved the output configuration to the _server_ module, we changed the
-definition of these outputs to be lists. This is so that we can update the
-module to create several instances at once in a future lab.
+Lorsque nous avons déplacé la configuration des outputs vers le module _server_, nous avons changé ces outputs en des listes. Ceci afin que nous puissions mettre à jour le module pour créer plusieurs instances à la fois dans un futur lab.
 
 ---
-[Next Lab ->](lab06-provisioners.md)
+[Laboratoire suivant ->] (lab06-provisioners.md)

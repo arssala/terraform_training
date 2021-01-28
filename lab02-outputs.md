@@ -1,17 +1,17 @@
 # Lab 2: Outputs
 
-Duration: 10 minutes
+Durée: 10 minutes
 
-Outputs allow us to query for specific values rather than parse metadata in `terraform show`.
+Les outputs nous permettent de rechercher des valeurs spécifiques plutôt que d'analyser les métadonnées dans `terraform show`.
 
-- Task 1: Create output variables in your configuration file
-- Task 2: Use the output command to find specific variables
+- Tâche 1: créer des variables de output dans votre fichier de configuration
+- Tâche 2: utiliser la commande de output pour trouver des variables spécifiques
 
-## Task 1: Create output variables in your configuration file
+## Tâche 1: créer des variables de output dans votre fichier de configuration
 
-### Step 2.1.1
+### Étape 2.1.1
 
-Create two new output variables named "public_dns" and "public_ip" to output the instance's public_dns and public_ip attributes
+Créez deux nouvelles variables de output nommées "public_dns" et "public_ip" pour générer les attributs public_dns et public_ip de l'instance
 
 ```hcl
 output "public_ip" {
@@ -23,32 +23,27 @@ output "public_dns" {
 }
 ```
 
-### Step 2.1.2
+### Étape 2.1.2
 
-Run the refresh command to pick up the new output
+Exécutez la commande `refresh` pour récupérer la nouvelle sortie
 
 ```shell
 terraform refresh
 ```
 
-## Task 2: Use the output command to find specific variables
+## Tâche 2: Utilisez la commande `output` pour trouver des variables spécifiques
 
-### Step 2.2.1 Try the terraform output command with no specifications
+### Étape 2.2.1 Essayez la commande `terraform output` sans spécifications
 
 ```shell
 terraform output
 ```
 
-### Step 2.2.2 Query specifically for the public_dns attributes
+### Étape 2.2.2 Requête spécifique pour les attributs public_dns
 
 ```shell
 terraform output public_dns
 ```
 
-### Step 2.2.3 Wrap an output query to ping the DNS record
-
-```shell
-ping $(terraform output public_dns)
-```
 ---
-[Next lab -->](lab03-console.md)
+[Lab suivant (La Console) ->](lab03-console.md)

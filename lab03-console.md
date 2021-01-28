@@ -1,18 +1,18 @@
-# Lab 3: Terraform Console
+# Lab 3: Console Terraform
 
-Duration: 10 minutes
+Durée: 10 minutes
 
-Terraform configurations and commands often use [expressions](https://www.terraform.io/docs/configuration/expressions.html) like `aws_instance.web.ami` to reference Terraform resources and their attributes.
+Les configurations et commandes Terraform utilisent souvent des [expressions] (https://www.terraform.io/docs/configuration/expressions.html) comme `aws_instance.web.ami` pour référencer les ressources Terraform et leurs attributs.
 
-Terraform includes an interactive console for evaluating expressions against the current Terraform state. This is especially useful for checking values while editing configurations.
+Terraform comprend une console interactive pour évaluer les expressions par rapport à l'état actuel de Terraform (state). Ceci est particulièrement utile pour vérifier les valeurs lors de la modification des configurations.
 
-- Task 1: Use `terraform console` to query specific instance information.
+- Tâche 1: Utilisez `terraform console` pour interroger des informations d'instance spécifiques.
 
-## Task 1: Use `terraform console` to query specific instance information.
+## Tâche 1: Utilisez `terraform console` pour interroger des informations d'instance spécifiques.
 
-### Step 3.1.1
+### Étape 3.1.1
 
-Find the AMI ID of your instance
+Trouvez l'ID AMI de votre instance
 
 ```shell
 terraform console
@@ -23,11 +23,11 @@ terraform console
 ami-0f9cf087c1f27d9b1
 ```
 
-Control+C exits the Terraform console
+Ctrl+C quitte la console Terraform
 
-### Step 3.1.2
+### Étape 3.1.2
 
-You can also pipe query information to the stdin of the console for evaluation
+Vous pouvez également diriger les informations de requête vers le stdin de la console pour évaluation
 
 ```shell
 echo "aws_instance.web.ami" | terraform console
@@ -38,4 +38,4 @@ ami-0f9cf087c1f27d9b1
 ```
 
 ---
-[Next lab -->](lab04-variables.md)
+[Lab suivant (les variables) ->](lab04-variables.md)

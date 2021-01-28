@@ -1,18 +1,18 @@
-# Lab 8: Meta-Arguments
+# Lab 8: Méta-Arguments
 
-Duration: 10 minutes
+Durée: 10 minutes
 
-So far, we've already used arguments to configure your resources. These arguments are used by the provider to specify things like the AMI to use, and the type of instance to provision. Terraform also supports a number of _Meta-Arguments_, which changes the way Terraform configures the resources. For instance, it's not uncommon to provision multiple copies of the same resource. We can do that with the _count_ argument.
+Jusqu'à présent, nous avons déjà utilisé des arguments pour configurer vos ressources. Ces arguments sont utilisés par le provider pour spécifier des éléments tels que l'AMI à utiliser et le type d'instance à provisionner. Terraform prend également en charge un certain nombre de _Meta-Arguments_, ce qui change la façon dont Terraform configure les ressources. Par exemple, il n'est pas rare de provisionner plusieurs copies de la même ressource. Nous pouvons le faire avec l'argument _count_.
 
-- Task 1: Change the number of AWS instances with `count`
-- Task 2: Modify the rest of the configuration to support multiple instances
-- Task 3: Add variable interpolation to the Name tag to count the new instance
+- Tâche 1: modifier le nombre d'instances AWS avec `count`
+- Tâche 2: modifier le reste de la configuration pour prendre en charge plusieurs instances
+- Tâche 3: Ajouter une interpolation de variable à la balise Name pour compter la nouvelle instance
 
-## Task 1: Change the number of AWS instances with `count`
+## Tâche 1: modifier le nombre d'instances AWS avec `count`
 
-### Step 8.1.1
+### Étape 8.1.1
 
-Add a count argument to the AWS instance in `server/server.tf` with a value of 2:
+Ajoutez un argument count à l'instance AWS dans `server/server.tf` avec une valeur de 2:
 
 ```hcl
 # ...
@@ -24,13 +24,13 @@ resource "aws_instance" "web" {
 }
 ```
 
-## Task 2: Modify the rest of the configuration to support multiple instances
+## Tâche 2: modifier le reste de la configuration pour prendre en charge plusieurs instances
 
-### Step 8.2.1
+### Étape 8.2.1
 
-If you run `terraform apply` now, you'll get an error. Since we added _count_ to the aws_instance.web resource, it now refers to multiple resources. Because of this, values like `aws_instance.web.public_ip` no longer refer to the public_ip of a single resource. We need to tell terraform which resource we're referring to.
+Si vous exécutez `terraform apply` maintenant, vous obtiendrez une erreur. Dès que nous avons ajouté _count_ à la ressource aws_instance.web, il fait désormais référence à plusieurs ressources. Pour cette raison, des valeurs telles que `aws_instance.web.public_ip` ne font plus référence au public_ip d'une seule ressource. Nous devons dire à terraform à quelle ressource nous nous référons.
 
-To do so, modify the output blocks in `server/server.tf` as follows:
+Pour ce faire, modifiez les blocs de sortie dans `server/server.tf` comme suit:
 
 ```
 output "public_ip" {
@@ -42,19 +42,17 @@ output "public_dns" {
 }
 ```
 
-The syntax `aws_instance.web.*` refers to all of the instances, so this will output a list of all of the public IPs and public DNS records. 
+La syntaxe `aws_instance.web. *` Fait référence à toutes les instances, donc cela affichera une liste de toutes les adresses IP publiques et des enregistrements DNS publics.
 
-### Step 8.2.2
+### Étape 8.2.2
 
-Run `terraform apply` to add the new instance. You should see two IP addresses and two DNS addresses in the outputs.
+Exécutez `terraform apply` pour ajouter la nouvelle instance. Vous devriez voir deux adresses IP et deux adresses DNS dans les sorties.
 
-## Task 3: Add variable interpolation to the Name tag to count the new instances
+## Tâche 3: Ajouter une interpolation de variable à la balise Name pour compter les nouvelles instances
 
-### Step 8.3.1
+### Étape 8.3.1
 
-Interpolate the count variable by changing the Name tag to include the current
-count over the total count. Update `server/server.tf` to add a new variable
-definition, and use it:
+Interpolez la variable de comptage en modifiant le tag Name pour inclure le nombre actuel par rapport au nombre total. Mettez à jour `server/server.tf` pour ajouter une nouvelle définition de variable et utilisez-la:
 
 ```hcl
 # ...
@@ -80,16 +78,16 @@ resource "aws_instance" "web" {
 # ...
 ```
 
-The solution builds on our previous discussion of variables. We must create a
-variable to hold our count so that we can reference that count twice in our
-resource. Next, we replace the value of the count parameter with the variable
-interpolation. Finally, we interpolate the current count (+ 1 because it's
-zero-indexed) and the variable itself.
+La solution s'appuie sur notre discussion précédente sur les variables. Nous devons créer une variable pour contenir notre compte afin que nous puissions référencer ce compte deux fois dans notre ressource. Ensuite, nous remplaçons la valeur du paramètre count par la variable interpolation. Enfin, nous interpolons le compte actuel (+1 car il est indexé à zéro) et la variable elle-même.
 
-### Step 8.3.2
+### Étape 8.3.2
 
-Run `terraform apply` in the terraform directory. You should see the revised tags that count the instances in the apply log.
+Exécutez `terraform apply` dans le répertoire terraform. Vous devriez voir les tags révisées qui comptent les instances dans le journal d'application.
 
 ```shell
 terraform apply
 ```
+
+
+---
+[Lab suivant ->](lab09-datasources.md)

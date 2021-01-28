@@ -1,18 +1,18 @@
 # Lab 4: Variables
 
-Duration: 15 minutes
+Durée: 15 minutes
 
-We don't want to hard code all of our values in the main.tf file. We can create a variable file for easier use.
+Nous ne voulons pas hard-coder toutes nos valeurs dans le fichier `main.tf`. Nous pouvons créer un fichier de variables pour une utilisation plus facile.
 
-- Task 1: Create variables in a configuration block
-- Task 2: Interpolate those variables
-- Task 3: Create a terraform.tfvars file
+- Tâche 1: créer des variables dans un bloc de configuration
+- Tâche 2: interpoler ces variables
+- Tâche 3: créer un fichier `terraform.tfvars`
 
-## Task 1: Create a new configuration block for variables
+## Tâche 1: Créer un nouveau bloc de configuration pour les variables
 
-### Step 4.1.1
+### Étape 4.1.1
 
-Add three variables at the top of your configuration file:
+Ajoutez trois variables en haut de votre fichier de configuration:
 
 ```hcl
 variable "access_key" {}
@@ -22,12 +22,11 @@ variable "region" {
 }
 ```
 
-## Task 2: Interpolate those variables into your existing code
+## Tâche 2: Interpoler ces variables dans votre code existant
 
-### Step 4.2.1
+### Étape 4.2.1
 
-Update the _provider_ block to replace the hard-coded values with the new
-variables.
+Mettez à jour le bloc _provider_ pour remplacer les valeurs hard-coded par les nouvelles variables.
 
 ```hcl
 provider "aws" {
@@ -37,9 +36,9 @@ provider "aws" {
 }
 ```
 
-### Step 4.2.2
+### Étape 4.2.2
 
-Rerun `terraform plan` for Terraform to pick up the new variables. Notice that you will be prompted for input now.
+Réexécutez `terraform plan` pour que Terraform récupère les nouvelles variables. Notez que vous serez invité à les entrer maintenant.
 
 ```shell
 terraform plan
@@ -50,30 +49,28 @@ var.access_key
   Enter a value:
 ```
 
-Use Ctrl+C to exit out of this plan.
+Utilisez Ctrl+C pour quitter.
 
-## Task 3: Edit your terraform.tfvars file
+## Tâche 3: Modifiez votre fichier `terraform.tfvars`
 
-Variables only defined in the configuration file will be prompted for input. We
-can avoid this by creating a variables file. You'll find a file called
-`terraform.tfvars` in your Terraform directory with several commented lines.
+Les variables définies uniquement dans le fichier de configuration seront invitées à la saisie. nous
+pouvons éviter cela en créant un fichier de variables.
 
-### Step 4.3.1
+### Étape 4.3.1
 
-Edit the `terraform.tfvars` file by uncommenting the first two key-value pairs:
+Créez le fichier `terraform.tfvars` contenant ces deux premières paires clé-valeur:
 
 ```
 access_key = "<ACCESSKEY>"
 secret_key = "<SECRETKEY>"
 
-...
 ```
 
-Rerun `terraform plan` and notice that this no longer prompts you for input.
+Réexécutez `terraform plan` et notez que cela ne vous invite plus à saisir.
 
-### Step 4.3.2
+### Étape 4.3.2
 
-You'll see that there are several other values in `terraform.tfvars`. Uncomment them and add matching variables to your `main.tf` file:
+Ajoutez les variables correspondantes à votre fichier `main.tf` dans `terraform.tfvars`:
 
 ```hcl
 variable "access_key" {}
@@ -89,9 +86,9 @@ variable "vpc_security_group_ids" {
 }
 ```
 
-### Step 4.3.3
+### Étape 4.3.3
 
-Edit your resource block with these changes as well.
+Modifiez également votre bloc de ressources avec ces modifications.
 
 ```hcl
 resource "aws_instance" "web" {
@@ -108,9 +105,7 @@ resource "aws_instance" "web" {
 }
 ```
 
-After making these changes, rerun `terraform plan`. You should see that there
-are no changes to apply, which is correct, since the variables contain the same
-values we had previously hard-coded:
+Après avoir effectué ces modifications, réexécutez `terraform plan`. Vous devriez voir qu'il n'y a aucun changement à appliquer, ce qui est correct, car les variables contiennent les mêmes valeurs que nous avions précédemment codées:
 
 ```text
 ...
@@ -123,4 +118,4 @@ actions need to be performed.
 ```
 
 ---
-[Next lab -->](lab05-modules.md)
+[Lab suivant (Les modules) ->](lab05-modules.md)
