@@ -136,3 +136,6 @@ ubuntu@ip-10-1-1-96:~$ exit
 logout
 Connection to ec2-54-203-220-176.us-west-2.compute.amazonaws.com closed.
 ```
+
+---
+[Next Lab ->](lab07-graph.md)

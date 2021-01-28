@@ -194,3 +194,6 @@ You should see output indicating that _aws_instance.web_ will be modified:
 ```
 
 When prompted to apply the changes, respond with `yes`.
+
+---
+[Next lab -->](lab02-outputs.md)

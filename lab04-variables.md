@@ -121,3 +121,6 @@ This means that Terraform did not detect any differences between your
 configuration and real physical resources that exist. As a result, no
 actions need to be performed.
 ```
+
+---
+[Next lab -->](lab05-modules.md)

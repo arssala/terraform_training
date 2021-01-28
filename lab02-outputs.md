@@ -50,3 +50,5 @@ terraform output public_dns
 ```shell
 ping $(terraform output public_dns)
 ```
+---
+[Next lab -->](lab03-console.md)

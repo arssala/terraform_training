@@ -36,3 +36,6 @@ echo "aws_instance.web.ami" | terraform console
 ```
 ami-0f9cf087c1f27d9b1
 ```
+
+---
+[Next lab -->](lab04-variables.md)
