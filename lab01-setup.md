@@ -87,13 +87,13 @@ Votre fichier final `main.tf` devrait ressembler à ceci avec des valeurs diffé
 
 ```hcl
 provider "aws" {
-  access_key = "<YOUR_ACCESSKEY>"
-  secret_key = "<YOUR_SECRETKEY>"
-  region     = "<REGION>"
+  access_key = "AKIAIUDVJEEI5KCIKJ6Q"
+  secret_key = "5HM1Mt+RTHDrJhP50y5JWTs7P2tPOTwfz7pzKPPD"
+  region     = "eu-west-3"
 }
 
 resource "aws_instance" "web" {
-  ami           = "<AMI>"
+  ami           = "ami-0ea4a063871686f37"
   instance_type = "t2.micro"
 
   subnet_id              = "<SUBNET>"
