@@ -222,4 +222,4 @@ public_ip = 54.184.51.90
 Lorsque nous avons déplacé la configuration des outputs vers le module _server_, nous avons changé ces outputs en des listes. Ceci afin que nous puissions mettre à jour le module pour créer plusieurs instances à la fois dans un futur lab.
 
 ---
-[Laboratoire suivant ->] (lab06-provisioners.md)
+[Lab suivant ->](lab06-provisioners.md)
