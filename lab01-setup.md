@@ -11,21 +11,66 @@ Durée: 20 minutes
 ## Tâche 1: connexion au poste de travail étudiant
 
 
-## Tâche 2: vérifier l'installation de Terraform
+## Tâche 2: Installation de Terraform
+### Quelques faits sur Terraform
+Terraform est un logiciel qui permet de gérer efficacement les ressources de l'infrastructure cloud à partir du code.
 
-### Étape 1.2.1
+En outre, il est appelé outil «Infrastructure as Code» car il utilise un fichier de configuration pour gérer les ressources.
 
-Exécutez la commande suivante pour vérifier la version de Terraform:
+De plus, il prend en charge les fournisseurs de services cloud tels que AWS, Google Cloud Platform, Azure et bien d'autres.
 
-```shell
-terraform -version
+
+### Installer terraform sur CentOS 7 / Ubuntu 18.04
+Voyons maintenant comment installer Terraform.
+
+#### Installation de Terraform sur CentOS 7
+Tout d'abord, mettez à jour les listes de référentiels en exécutant la commande ci-dessous.
 ```
-
-Tu devrais voir:
-
-```text
-Terraform v0.12.6
+sudo yum update
 ```
+Ensuite, vous devrez avoir un **wget** et **unzip**. Si vous ne l'avez pas, installez-les en exécutant la commande ci-dessous.
+```
+sudo yum install wget unzip
+```
+Téléchargez maintenant Terraform depuis le site Web du développeur en exécutant la commande suivante.
+```
+sudo wget https://releases.hashicorp.com/terraform/0.12.2/terraform_0.12.2_linux_amd64.zip
+```
+Puis extrayez le fichier téléchargé.
+```
+sudo unzip ./terraform_0.12.2_linux_amd64.zip –d /usr/local/bin
+```
+La sortie doit afficher le chemin du répertoire de Terraform.
+
+Enfin, vérifiez que le Terraform est capable d'accepter les commandes.
+```
+terraform –v
+```
+En conséquence, il doit afficher le Terraform v.0.12.6.
+
+####Installer Terraform sur Ubuntu 18.04
+Tout d'abord, vous devez mettre à jour les listes de référentiels. Pour cela, exécutez la commande ci-dessous.
+```
+sudo apt-get update
+```
+Vous pouvez exécuter la commande ci-dessous pour installer **wget** et **unzip**.
+```
+sudo apt-get install wget unzip
+```
+Maintenant, exécutez l'utilitaire wget ci-dessous pour télécharger le Terraform.
+```
+sudo wget https://releases.hashicorp.com/terraform/0.12.2/terraform_0.12.2_linux_amd64.zip
+```
+Après le téléchargement, extrayez le fichier.
+```
+sudo unzip ./ terraform_0.12.2_linux_amd64.zip –d /usr/local/bin
+```
+Enfin, vérifiez que le Terraform est capable d'accepter les commandes.
+```
+terraform –v
+```
+Par conséquent, la sortie doit afficher Terraform v.0.12.6.
+
 
 ## Tâche 3: Générez votre première configuration Terraform
 
@@ -146,7 +191,7 @@ Exécutez la commande `terraform apply` pour générer des ressources réelles d
 terraform apply
 ```
 
-Vous serez invité à confirmer les modifications avant leur application. Répondre avec
+Vous serez invité à confirmer les modifications avant leur application. Répondez avec
 `yes`.
 
 ### Étape 1.5.2
@@ -166,7 +211,7 @@ Ajoutez deux balises à l'instance AWS:
 
 ```hcl
   tags = {
-    "Identity"    = "..."
+    "Identity"    = "terraform"
     "Name"        = "Student"
     "Environment" = "Training"
   }
